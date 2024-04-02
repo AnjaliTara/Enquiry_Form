@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>Enquiry Project using Forms</title>
+	<style>*{ font-size:40px; } </style>
+	<script>
+		function validate()
+		{
+			var n=document.getElementById("id_name");
+			var p=document.getElementById("id_phone");
+			var name_regrex=/^[A-Za-z]+$/
+			if (n.value==""|name_regrex.test(n.value)|n.value.length<2)
+			{
+				alert("invalid name"):
+				n.value="";
+				n.focus();
+				return false;
+			}
+			if(p.value.length!=10)
+			{
+				alert("invalid phone number");
+				p.value="";
+				p.focus();
+				return false;
+			}
+			return true;
+		}
+	</script>
+</head>
+<body>
+<center>
+	<h1>Enquiry App </h1>
+	<form method="POST" onsubmit="return validate()">
+	{% csrf_token %}
+	<table border="2">
+		{{ fm.as_table }}
+	</table>
+		<br>
+		<input type="submit">
+	</form>
+	{{ msg }}
+</center>
+</body>
+</html>
